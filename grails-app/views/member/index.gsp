@@ -51,9 +51,11 @@
 						<td>${fieldValue(bean: memberInstance, field: "contact")}</td>
 					
 						<td>${fieldValue(bean: memberInstance, field: "email")}</td>
-					
+
 						<td><g:formatBoolean boolean="${memberInstance.accountExpired}" /></td>
-					
+
+
+
 					</tr>
 				</g:each>
 				</tbody>

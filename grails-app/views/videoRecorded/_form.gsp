@@ -1,5 +1,24 @@
 <%@ page import="digitalmediarecords.VideoRecorded" %>
+<script>
+	$(document).ready(function(){
+		$("#paymentMoneyDiv").hide();
+	});
 
+	function statusChanged(){
+		document.getElementById("paymentMoney").value = '';
+		if($("#stsChanged").val()=="Closed"){
+			document.getElementById("paymentMoneyDiv").style.display="block";
+			document.getElementById("paymentMoneyDiv").hidden = false;
+		}
+		else {
+			$("#paymentMoneyDiv").hide()
+		}
+	}
+</script>
+<div class="form-group "  hidden="hidden" id="paymentMoneyDiv">
+	<label for="inputName">Payment Money Rs.</label>
+	<input type="number"  class="form-control" name="paymentMoney" id="paymentMoney">
+</div>
 
 
 <div class="fieldcontain ${hasErrors(bean: videoRecordedInstance, field: 'status', 'error')} required">
@@ -7,9 +26,10 @@
 		<g:message code="videoRecorded.status.label" default="Status" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="status" from="${videoRecordedInstance.constraints.status.inList}" required="" value="${videoRecordedInstance?.status}" valueMessagePrefix="videoRecorded.status"/>
-
+	<g:select name="status" onchange="statusChanged()" id="stsChanged" from="${videoRecordedInstance.constraints.status.inList}" required="" value="${videoRecordedInstance?.status}" valueMessagePrefix="videoRecorded.status"/>
 </div>
+
+
 
 <div class="fieldcontain ${hasErrors(bean: videoRecordedInstance, field: 'assignedTo', 'error')} required">
 	<label for="assignedTo">

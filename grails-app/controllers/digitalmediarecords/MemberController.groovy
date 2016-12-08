@@ -9,6 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MemberController {
 
+    def memberService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -36,11 +37,12 @@ class MemberController {
             return
         }
 
+/*
         memberInstance.save flush:true
-
+*/
+    def message = memberService.saveMember(memberInstance, params.role, true)
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])
                 redirect memberInstance
             }
             '*' { respond memberInstance, [status: CREATED] }

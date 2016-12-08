@@ -11,6 +11,14 @@
 
 </div>
 
+<g:if test="${memberInstance?.id}">
+	<g:select id="role" name="role" class="form-control"  from="${digitalmediarecords.Role.list()}" optionKey="authority" noSelection="['':'-Select Role-']"
+			  optionValue="authority" required="" onchange="roleChanged(this);" value="${digitalmediarecords.UserRole.findByUser(memberInstance)?.role?.authority}"/>
+</g:if>
+<g:else>
+	<g:select id="role" name="role" class="form-control" onchange="roleChanged(this);" from="${digitalmediarecords.Role.list()}" optionKey="authority" noSelection="['':'-Select Role-']"
+			  optionValue="authority" required=""/>
+</g:else>
 <div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'password', 'error')} required">
 	<label for="password">
 		<g:message code="member.password.label" default="Password" />
